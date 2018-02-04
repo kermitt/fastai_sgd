@@ -38,15 +38,21 @@ const y_times_x_plus_b = () => {
 const sgd = () => {
   const SGD = require('./logic.js').SGD
   let results = SGD(14, 58)
-
-  let isOk = results.y_pred == 15 && results.err == 1849
-  log2(isOk, results)
+  let isOk = results.e_y_pred == 15 && results.f_err == 1849 && results.i_errA1 == 1836.98
+  log(isOk, 'sgd')
+  pretty_print(results)
 }
+
 // + -------------------- HOUSEWORK FOLLOWS ------------- +
 
-function log2 (isOk, obj) {
-  let verdict = isOk ? 'PASS' : 'FAIL'
-  console.log(verdict + '\n' + JSON.stringify(obj, null, 6))
+function closeEnough (actual, slop, target) {
+  // ignore floating point number noise
+  let isOk = ((actual + slop) > target && (actual - slop) < target)
+  return isOk
+}
+
+function pretty_print (obj) {
+  console.log(JSON.stringify(obj, null, 6))
 }
 function log (isOk, msg) {
   let verdict = isOk ? 'PASS' : 'FAIL'

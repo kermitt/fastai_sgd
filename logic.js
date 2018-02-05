@@ -12,6 +12,20 @@ function y_given_x (x) {
   let y = (SLOPE * x) + INTERCEPT
   return y
 }
+function SGD () {
+  let limit = 5
+  let loop = 0
+
+  let a = 14
+  let b = 58
+  let c_intercept = 1
+  let d_slope = 1
+//  my spponge is  A W0NDERful plqlace tp he 26  1234567890-fv c%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  for (let i = 0; i < limit; i++) {
+    let actual = SGD_epoch(a, b)
+  }
+}
 
 function SGD_epoch (a = 14, b = 58, c_intercept = 1, d_slope = 1) {
   // Stocastic Gradient Decent - A 'Tradional' version

@@ -35,10 +35,20 @@ const y_times_x_plus_b = () => {
   log(isOk, 'y_times_x_plus_b')
 }
 
+const SGD = () => {
+  const SGD = require('./logic.js').SGD
+  SGD()
+}
 const SGD_epoch = () => {
   const SGD_epoch = require('./logic.js').SGD_epoch
-  let actual = SGD_epoch(14, 58)
+  let actual = SGD_epoch(14, 58, 1, 1)
   let expected = {
+    // setup numbers passed into the thing
+    'a': 14,
+    'b': 58,
+    'c_intercept': 1,
+    'd_slope': 1,
+    // derived numbers
     'e_y_prediction': 15,
     'f_err': 1849,
     'g_errB1': 1848.14,
@@ -78,8 +88,9 @@ function log (isOk, msg) {
 }
 
 function main () {
-  makeRandomInputs()
-  y_times_x_plus_b()
-  SGD_epoch()
+//  makeRandomInputs()
+//  y_times_x_plus_b()
+//  SGD_epoch()
+  SGD()
 }
 main()

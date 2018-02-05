@@ -18,18 +18,26 @@ function SGD () {
 
   let a = 14
   let b = 58
-  let c_intercept = 1
-  let d_slope = 1
-//  my spponge is  A W0NDERful plqlace tp he 26  1234567890-fv c%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  let intercept = 1
+  let slope = 1
+  // Sabrina's comment.
+  //  my spponge is  A W0NDERful plqlace tp he 26  1234567890-fv c%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   for (let i = 0; i < limit; i++) {
-    let actual = SGD_epoch(a, b)
+    let results = SGD_epoch(a, b, intercept, slope)
+    a = results.new_a
+    b = results.new_b
+    console.log(i + ' a: ' + a + '  b: ' + b)
   }
 }
 
 function SGD_epoch (a = 14, b = 58, c_intercept = 1, d_slope = 1) {
   // Stocastic Gradient Decent - A 'Tradional' version
   let results = {}
+  results.a = a
+  results.b = b
+  results.c_intercept = c_intercept
+  results.d_slope = d_slope
   // =C4+D4*A4
   results.e_y_prediction = c_intercept + d_slope * a
   // =(B4-E4)^2
@@ -63,7 +71,8 @@ function pretty (results) {
 module.exports = {
   randIntBetween0And100: randIntBetween0And100,
   y_given_x: y_given_x,
-  SGD_epoch: SGD_epoch
+  SGD_epoch: SGD_epoch,
+  SGD: SGD
 }
 // https://stratechery.com/2018/amazon-health/
 // https://www.reddit.com/r/Futurology/comments/7v70pr/amazon_could_disrupt_us_healthcare_by_converting/

@@ -35,20 +35,38 @@ const y_times_x_plus_b = () => {
   log(isOk, 'y_times_x_plus_b')
 }
 
-const sgd = () => {
-  const SGD = require('./logic.js').SGD
-  let results = SGD(14, 58)
-  let isOk = results.e_y_pred == 15 && results.f_err == 1849 && results.i_errA1 == 1836.98
-  log(isOk, 'sgd')
-  pretty_print(results)
-}
+const SGD_epoch = () => {
+  const SGD_epoch = require('./logic.js').SGD_epoch
+  let actual = SGD_epoch(14, 58)
+  let expected = {
+    'e_y_prediction': 15,
+    'f_err': 1849,
+    'g_errB1': 1848.14,
+    'h_est_de_db': -85.99,
+    'i_errA1': 1836.98,
+    'j_est_de_da': -1202.04,
+    'k_de_dB': -86.00,
+    'l_de_dA': -1204.00,
+    'new_a': 1.12,
+    'new_b': 1.01
+  }
+  let isOk = true
+  let results = SGD_epoch()
+  for (let key in actual) {
+    let a = actual[key].toFixed(2)
+    let e = expected[key].toFixed(2)
+    let verdict = 'DIFF'
 
-// + -------------------- HOUSEWORK FOLLOWS ------------- +
-
-function closeEnough (actual, slop, target) {
-  // ignore floating point number noise
-  let isOk = ((actual + slop) > target && (actual - slop) < target)
-  return isOk
+    let pad = key.length >= 7 ? '\t' : '\t\t'
+    if (a == e) {
+      verdict = 'SAME'
+      console.log(isOk + '\tSGD_epoch - pass ' + key + pad + a)
+    } else {
+      isOk = false
+      console.log(isOk + '\tSGD_epoch - fail ' + key + pad + a + ' --! --> ' + e)
+    }
+  }
+  log(isOk, 'SGD_epoch')
 }
 
 function pretty_print (obj) {
@@ -62,6 +80,6 @@ function log (isOk, msg) {
 function main () {
   makeRandomInputs()
   y_times_x_plus_b()
-  sgd()
+  SGD_epoch()
 }
 main()
